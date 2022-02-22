@@ -182,11 +182,11 @@ export default class ExcelPage extends Component {
       };
     });
     return (
-      <>
+      <div style={{padding: '20px'}}> 
         <h1>Importing Excel Component</h1>
         <Row gutter={16}>
           <Col
-            span={8}
+            span={4}
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -194,36 +194,35 @@ export default class ExcelPage extends Component {
               marginBottom: "5%"
             }}
           >
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <div className="page-title">Upload User Data</div>
-            </div>
+            <Upload
+            name="file"
+            beforeUpload={this.fileHandler}
+            onRemove={() => this.setState({ rows: [] })}
+            multiple={false}
+          >
+            <Button>
+              <Icon type="upload" /> Upload Excel
+            </Button>
+          </Upload>
           </Col>
-          <Col span={8}>
+          <Col span={4}>
             <a
-              href="https://res.cloudinary.com/bryta/raw/upload/v1562751445/Sample_Excel_Sheet_muxx6s.xlsx"
+              href="https://partner2w-businessnetwork-service.cfapps.eu10.hana.ondemand.com/createExcelFromDB"
               target="_blank"
               rel="noopener noreferrer"
               download
             >
-              Sample excel sheet
+              <Button>Download Excel</Button>
             </a>
           </Col>
           <Col
-            span={8}
+            span={4}
             align="right"
             style={{ display: "flex", justifyContent: "space-between" }}
           >
             {this.state.rows.length > 0 && (
               <>
-                <Button
-                  onClick={this.handleAdd}
-                  size="large"
-                  type="info"
-                  style={{ marginBottom: 16 }}
-                >
-                  <Icon type="plus" />
-                  Add a row
-                </Button>{" "}
+               
                 <Button
                   onClick={this.handleSubmit}
                   size="large"
@@ -237,26 +236,10 @@ export default class ExcelPage extends Component {
           </Col>
         </Row>
         <div>
-          <Upload
-            name="file"
-            beforeUpload={this.fileHandler}
-            onRemove={() => this.setState({ rows: [] })}
-            multiple={false}
-          >
-            <Button>
-              <Icon type="upload" /> Click to Upload Excel File
-            </Button>
-          </Upload>
+          
         </div>
-        <div style={{ marginTop: 20 }}>
-          <Table
-            components={components}
-            rowClassName={() => "editable-row"}
-            dataSource={this.state.rows}
-            columns={columns}
-          />
-        </div>
-      </>
+       
+      </div>
     );
   }
 }
